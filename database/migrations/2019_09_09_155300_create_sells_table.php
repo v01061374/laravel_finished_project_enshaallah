@@ -25,7 +25,6 @@ class CreateSellsTable extends Migration
             $table->tinyInteger('qty');
             $table->boolean('is_final');
             $table->boolean('is_returned');
-            $table->integer('order_number');
             $table->timestamps();
         });
     }

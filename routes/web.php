@@ -1,5 +1,15 @@
 <?php
 
+use App\CustomClasses\Hasher;
+
+Route::bind('id', function ($id) {
+    try{
+        return Hasher::decode($id);
+    } catch(Exception $e){
+        abort(404);
+    }
+
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +22,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.index');
+});
+
+Route::prefix('dashboard')->group(function (){
+    Route::prefix('suppliers')->group(function (){
+       Route::get('/', 'SuppliersController@index')->name('suppliers.index');
+       Route::get('/create', 'SuppliersController@create');
+       Route::post('/store', 'SuppliersController@store')->name('suppliers.store');
+       Route::get('/edit/{id}','SuppliersController@edit');
+       Route::get('/delete/{id}','SuppliersController@destroy')->name('suppliers.delete');
+    });
 });

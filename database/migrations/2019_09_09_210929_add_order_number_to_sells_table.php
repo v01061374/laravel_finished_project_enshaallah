@@ -14,7 +14,7 @@ class AddOrderNumberToSellsTable extends Migration
     public function up()
     {
         Schema::table('sells', function (Blueprint $table) {
-            $table->integer('order_number');
+            $table->integer('order_number')->change();
         });
     }
 
