@@ -5,69 +5,95 @@
 @section('body-class')
     hold-transition sidebar-mini
 @endsection
-@section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Starter Page</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
 
+    <!-- Content Wrapper. Contains page content -->
+
+        <!-- /.content-header -->
+@section('content')
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    @error('title')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                <div class="row mb-5">
+                    <a href="{{route('suppliers.create')}}">
+                        <button type="button" class="btn btn-block btn-primary">
+                            <i class="far fa-plus-square"></i>
+                            Add new
+                        </button>
+                    </a>
                 </div>
                 <div class="row">
-                    @if(session()->has('message'))
-                        <div class="alert alert-success">
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
-                    @if(session()->has('no-change'))
-                        <div class="alert alert-danger">
-                            {{ session()->get('no-change') }}
-                        </div>
-                    @endif
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-hover dataTable" role="grid">
+                            <thead>
+                                <tr>
+                                    <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending" class="sorting_asc">#</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Title</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Address</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($suppliers as $i => $supplier)
+                                    <tr>
+                                        <td class="sorting_1">
+                                            {{$i+1}}
+                                        </td>
+                                        <td>
+                                            {{$supplier['title']}}
+                                        </td>
+                                        <td>
+                                            {{$supplier['address']}}
+                                        </td>
+                                        <td id="row-actions">
+                                            <a href="" title="details"><i  style="color: #869099; margin-right: 5px;" class="fas fa-eye"></i></a>
+                                                {{--link to purchase--}}
+                                            <a title="edit" href="{{route('suppliers.edit', ['id' => \App\CustomClasses\Hasher::encode($supplier['id'])])}}"><i style="color: #869099; margin-right: 5px;" class="fas fa-edit"></i></a>
+                                            <i title="delete" class="row-delete fas fa-trash-alt" data-toggle="modal" data-target="#modal-delete" style="color: red; margin-right: 5px; cursor: pointer;" data-action="{{route('suppliers.delete',\App\CustomClasses\Hasher::encode($supplier['id']))}}"></i>
 
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
-                <div class="row">
-                    {!! Form::open(['route' => [isset($supplier)?'suppliers.update':'suppliers.store', isset($supplier)?$supplier['id']:'']]) !!}
-                    <div class="form-group">
-                        {!! Form::label('title', 'Title'); !!}
-                        {!! Form::text('title',isset($supplier)?$supplier['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::textarea('address','', ['class' => 'form-control', 'placeholder' => 'Address', 'value' => isset($supplier)?$supplier['address']:'']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::submit(isset($supplier)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
-                    </div>
-                </div>
-                <!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content -->
-    </div>
+        <div class="modal fade show" id="modal-delete" style="padding-right: 16px;" aria-modal="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Notice</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete this entry?</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button id="delete-no" type="button" class="btn btn-outline-light" data-dismiss="modal">No</button>
+                        <button id="delete-yes" type="button" class="btn btn-outline-light" data-dismiss="modal">yes</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.c <tent -->
+
     <!-- /.content-wrapper -->
 
 
 
 
 @endsection
+

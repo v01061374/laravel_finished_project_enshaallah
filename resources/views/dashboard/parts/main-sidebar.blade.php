@@ -49,14 +49,43 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('suppliers.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-store"></i>
                         <p>
                             Suppliers
-                            <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
                 </li>
+                {{--<li class="nav-item has-treeview">--}}
+                    {{--<a href="{{route('suppliers.index')}}" class="nav-link">--}}
+                        {{--<i class="nav-icon fas fa-chart-pie"></i>--}}
+                        {{--<p>--}}
+                            {{--Suppliers--}}
+                            {{--<i class="right fas fa-angle-left"></i>--}}
+                        {{--</p>--}}
+                    {{--</a>--}}
+                    {{--<ul class="nav nav-treeview" style="display: block;">--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a href=".{{route('s')}}" class="nav-link">--}}
+                                {{--<i class="far fa-circle nav-icon"></i>--}}
+                                {{--<p>ChartJS</p>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a href="../charts/flot.html" class="nav-link">--}}
+                                {{--<i class="far fa-circle nav-icon"></i>--}}
+                                {{--<p>Flot</p>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a href="../charts/inline.html" class="nav-link">--}}
+                                {{--<i class="far fa-circle nav-icon"></i>--}}
+                                {{--<p>Inline</p>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
             </ul>
+
         </nav>
         <!-- /.sidebar-menu -->
     </div>

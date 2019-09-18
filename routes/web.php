@@ -28,9 +28,10 @@ Route::get('/', function () {
 Route::prefix('dashboard')->group(function (){
     Route::prefix('suppliers')->group(function (){
        Route::get('/', 'SuppliersController@index')->name('suppliers.index');
-       Route::get('/create', 'SuppliersController@create');
+       Route::get('/create', 'SuppliersController@create')->name('suppliers.create');
        Route::post('/store', 'SuppliersController@store')->name('suppliers.store');
-       Route::get('/edit/{id}','SuppliersController@edit');
+       Route::get('/edit/{id}','SuppliersController@edit')->name('suppliers.edit');
+       Route::post('/update/{id}','SuppliersController@update')->name('suppliers.update');
        Route::get('/delete/{id}','SuppliersController@destroy')->name('suppliers.delete');
     });
 });

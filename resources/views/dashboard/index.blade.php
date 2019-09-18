@@ -1,3 +1,4 @@
+
 @extends('dashboard.layouts.master')
 @section('title')
 @endsection
