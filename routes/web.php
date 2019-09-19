@@ -53,5 +53,13 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','WeightsController@update')->name('weights.update');
         Route::get('/delete/{id}','WeightsController@destroy')->name('weights.delete');
     });
+    Route::prefix('productCategories')->group(function (){
+        Route::get('/', 'ProductCategoriesController@index')->name('productCategories.index');
+        Route::get('/create', 'ProductCategoriesController@create')->name('productCategories.create');
+        Route::post('/store', 'ProductCategoriesController@store')->name('productCategories.store');
+        Route::get('/edit/{id}','ProductCategoriesController@edit')->name('productCategories.edit');
+        Route::post('/update/{id}','ProductCategoriesController@update')->name('productCategories.update');
+        Route::get('/delete/{id}','ProductCategoriesController@destroy')->name('productCategories.delete');
+    });
 
 });

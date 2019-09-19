@@ -34,7 +34,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('suppliers.index')}}" class="nav-link  {{request()->is(substr(route('suppliers.index', [], false), 1)) ? 'active' : ''}}">
+                            <a href="{{route('suppliers.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('suppliers.index', [], false), 1))) ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-store"></i>
                                 <p>
                                     Suppliers
@@ -42,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('sizes.index')}}" class="nav-link  {{request()->is(substr(route('sizes.index', [], false), 1)) ? 'active' : ''}}">
+                            <a href="{{route('sizes.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('sizes.index', [], false), 1))) ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-box"></i>
                                 <p>
                                     Sizes
@@ -50,10 +50,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('weights.index')}}" class="nav-link  {{request()->is(substr(route('weights.index', [], false), 1)) ? 'active' : ''}}">
+                            <a href="{{route('weights.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('weights.index', [], false), 1))) ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-weight"></i>
                                 <p>
                                     Weights
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('productCategories.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('productCategories.index', [], false), 1))) ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-grip-lines-vertical"></i>
+                                <p>
+                                    Product Categories
                                 </p>
                             </a>
                         </li>

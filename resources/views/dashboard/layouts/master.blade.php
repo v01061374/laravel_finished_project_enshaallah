@@ -42,7 +42,7 @@
                                     @elseif($i==count($sections)-1)
                                         {{ucfirst($section)}}
                                     @else
-                                        <a href="/dashboard/{{$section}}">{{ucfirst($section)}}</a>
+                                        <a href="/dashboard/{{lcfirst($section)}}">{{$section}}</a>
                                     @endif
                                 </li>
                                 {{--{{ ($i==count(explode('/',request()->path()))-1)? "":"/"}}--}}
@@ -84,6 +84,11 @@
             ]
         });
         $(".weights-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[3]}
+            ]
+        });
+        $(".productCategories-dataTable").dataTable({
             "columnDefs": [
                 { "orderable": false, "targets":[3]}
             ]
