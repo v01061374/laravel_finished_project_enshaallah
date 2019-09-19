@@ -77,6 +77,8 @@ class SuppliersController extends Controller
 //        else{
 //            redirect(404);
 //        }
+         // TODO show related products
+
     }
 
     /**

@@ -45,5 +45,13 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','SizesController@update')->name('sizes.update');
         Route::get('/delete/{id}','SizesController@destroy')->name('sizes.delete');
     });
+    Route::prefix('weights')->group(function (){
+        Route::get('/', 'WeightsController@index')->name('weights.index');
+        Route::get('/create', 'WeightsController@create')->name('weights.create');
+        Route::post('/store', 'WeightsController@store')->name('weights.store');
+        Route::get('/edit/{id}','WeightsController@edit')->name('weights.edit');
+        Route::post('/update/{id}','WeightsController@update')->name('weights.update');
+        Route::get('/delete/{id}','WeightsController@destroy')->name('weights.delete');
+    });
 
 });

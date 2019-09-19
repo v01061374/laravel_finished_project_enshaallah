@@ -64,6 +64,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('weights.index')}}" class="nav-link  {{request()->is(substr(route('weights.index', [], false), 1)) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-weight"></i>
+                        <p>
+                            Weights
+                        </p>
+                    </a>
+                </li>
                 {{--<li class="nav-item has-treeview">--}}
                     {{--<a href="{{route('suppliers.index')}}" class="nav-link">--}}
                         {{--<i class="nav-icon fas fa-chart-pie"></i>--}}

@@ -37,10 +37,12 @@
                         <ol class="breadcrumb float-sm-right">
                             @foreach($sections as $i => $section)
                                 <li class="breadcrumb-item {{ ($i==count($sections)-1)? "active": ""}}">
-                                    @if($i==count($sections)-1)
+                                    @if($i==0)
+                                        <a href="/{{$section}}">{{ucfirst($section)}}</a>
+                                    @elseif($i==count($sections)-1)
                                         {{ucfirst($section)}}
                                     @else
-                                        <a href="/{{$section}}">{{ucfirst($section)}}</a>
+                                        <a href="/dashboard/{{$section}}">{{ucfirst($section)}}</a>
                                     @endif
                                 </li>
                                 {{--{{ ($i==count(explode('/',request()->path()))-1)? "":"/"}}--}}
@@ -79,6 +81,11 @@
         $(".sizes-dataTable").dataTable({
             "columnDefs": [
                 { "orderable": false, "targets":[5]}
+            ]
+        });
+        $(".weights-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[3]}
             ]
         });
         var set_action = function (clicked) {

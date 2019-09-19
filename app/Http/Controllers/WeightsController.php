@@ -3,22 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\CustomClasses\Hasher;
-use App\models\Size;
+use App\models\Weight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class SizesController extends Controller
+class WeightsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected static $model = 'Size';
     public function index()
     {
-        $sizes = Size::all()->toArray();
-        return view('dashboard.sizes.index', compact('sizes'));
+        $weights = Weight::all()->toArray();
+        return view('dashboard.weights.index', compact('weights'));
     }
 
     /**
@@ -28,7 +27,7 @@ class SizesController extends Controller
      */
     public function create()
     {
-        return view('dashboard.sizes.cu');
+        return view('dashboard.weights.cu');
     }
 
     /**
@@ -39,26 +38,21 @@ class SizesController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-           'title'=>  'required|unique:sizes|max:20',
-            'max_cm_height' => 'max:10',
-            'max_cm_width' => 'max:10',
-            'max_cm_length' => 'max:10',
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|unique:weights|max:20',
+            'max_gr_weight' => 'required|unique:weights|max:10'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $size = new Size([
+            $weight = new Weight([
                 'title' => $request['title'],
-                'max_cm_height' => (isset($request['max_cm_height']))?$request['max_cm_height']:'',
-                'max_cm_width' => (isset($request['max_cm_width']))?$request['max_cm_width']:'',
-                'max_cm_length' => (isset($request['max_cm_length']))?$request['max_cm_length']:'',
-
+                'max_gr_weight' => $request['max_gr_weight']
             ]);
-            $size->save();
+            $weight->save();
             return redirect()
-                ->route('sizes.index')
+                ->route('weights.index')
 //                should be changed to index page
                 ->with('message', 'Entry Inserted Successfully!');
         }
@@ -67,10 +61,10 @@ class SizesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Size  $size
+     * @param  \App\models\Weight  $weight
      * @return \Illuminate\Http\Response
      */
-    public function show(Size $size)
+    public function show(Weight $weight)
     {
         // TODO show related products
     }
@@ -78,16 +72,16 @@ class SizesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Size  $size
+     * @param  \App\models\Weight  $weight
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $size = Size::findOrFail($id)->toArray();
+        $weight = Weight::findOrFail($id)->toArray();
 
-        if($size){
-            $size['id'] = Hasher::encode($size['id']);
-            return view('dashboard.sizes.cu', compact('size'));
+        if($weight){
+            $weight['id'] = Hasher::encode($weight['id']);
+            return view('dashboard.weights.cu', compact('weight'));
         }
         else{
             abort(404);
@@ -98,31 +92,22 @@ class SizesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Size  $size
+     * @param  \App\models\Weight  $weight
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'title' => 'required|max:20|unique:sizes,title,'.$id,
+            'title' => 'required|max:20|unique:weights,title,'.$id,
+            'max_gr_weight' => 'required|max:10|unique:weights,max_gr_weight,'.$id
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $old = Size::find($id);
-            if(
-                $old['title']!=$request['title']
-                ||(isset($request['max_cm_height'])&&$request['max_cm_height']!=$old['max_cm_height'])
-                ||(isset($request['max_cm_width'])&&$request['max_cm_width']!=$old['max_cm_width'])
-                ||(isset($request['max_cm_length'])&&$request['max_cm_length']!=$old['max_cm_length'])
-                ){
-                $old->update([
-                    'title' => $request['title']
-                    ,'max_cm_height' => $request['max_cm_height']
-                    ,'max_cm_width' => $request['max_cm_width']
-                    ,'max_cm_length' => $request['max_cm_length']]
-                );
+            $old = Weight::find($id);
+            if($old['title']!=$request['title']||$request['max_gr_weight']!=$old['max_gr_weight']){
+                $old->update(['title' => $request['title'], 'max_gr_weight' => $request['max_gr_weight']]);
                 $old->save();
                 return redirect()->back()->with('message', 'Update Successful!');
 
@@ -136,14 +121,14 @@ class SizesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Size  $size
+     * @param  \App\models\Weight  $weight
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $size = Size::findOrFail($id);
-        if($size->toArray()){
-            $size->delete();
+        $weight = Weight::findOrFail($id);
+        if($weight->toArray()){
+            $weight->delete();
         }
         else{
             abort(404);
