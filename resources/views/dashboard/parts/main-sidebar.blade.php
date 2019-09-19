@@ -24,54 +24,43 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-box-open"></i>
                         <p>
-                            Starter Pages
+                            Products
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
+                            <a href="{{route('suppliers.index')}}" class="nav-link  {{request()->is(substr(route('suppliers.index', [], false), 1)) ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-store"></i>
+                                <p>
+                                    Suppliers
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                            <a href="{{route('sizes.index')}}" class="nav-link  {{request()->is(substr(route('sizes.index', [], false), 1)) ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-box"></i>
+                                <p>
+                                    Sizes
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('weights.index')}}" class="nav-link  {{request()->is(substr(route('weights.index', [], false), 1)) ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-weight"></i>
+                                <p>
+                                    Weights
+                                </p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{route('suppliers.index')}}" class="nav-link  {{request()->is(substr(route('suppliers.index', [], false), 1)) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-store"></i>
-                        <p>
-                            Suppliers
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('sizes.index')}}" class="nav-link  {{request()->is(substr(route('sizes.index', [], false), 1)) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-box"></i>
-                        <p>
-                            Sizes
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('weights.index')}}" class="nav-link  {{request()->is(substr(route('weights.index', [], false), 1)) ? 'active' : ''}}">
-                        <i class="nav-icon fas fa-weight"></i>
-                        <p>
-                            Weights
-                        </p>
-                    </a>
-                </li>
+
                 {{--<li class="nav-item has-treeview">--}}
                     {{--<a href="{{route('suppliers.index')}}" class="nav-link">--}}
                         {{--<i class="nav-icon fas fa-chart-pie"></i>--}}
