@@ -35,9 +35,9 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            @foreach(explode('/',request()->path()) as $i => $section)
-                                <li class="breadcrumb-item {{ ($i==count(explode('/',request()->path()))-1)? "active": ""}}">
-                                    @if($i==count(explode('/',request()->path()))-1)
+                            @foreach($sections as $i => $section)
+                                <li class="breadcrumb-item {{ ($i==count($sections)-1)? "active": ""}}">
+                                    @if($i==count($sections)-1)
                                         {{ucfirst($section)}}
                                     @else
                                         <a href="/{{$section}}">{{ucfirst($section)}}</a>
@@ -51,6 +51,7 @@
             </div><!-- /.container-fluid -->
         </div>
         @yield('content')
+        @include('dashboard.parts.delete-modal')
     </div>
     @include('dashboard.parts.control-sidebar')
     @include('dashboard.parts.main-footer')
@@ -70,8 +71,15 @@
 
 
     $(document).ready(function() {
-        $(".dataTable").dataTable({
-
+        $(".suppliers-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2,3]}
+            ]
+        });
+        $(".sizes-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[5]}
+            ]
         });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');

@@ -47,11 +47,20 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{route('suppliers.index')}}" class="nav-link">
+                    <a href="{{route('suppliers.index')}}" class="nav-link  {{request()->is(substr(route('suppliers.index', [], false), 1)) ? 'active' : ''}}">
                         <i class="nav-icon fas fa-store"></i>
                         <p>
                             Suppliers
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('sizes.index')}}" class="nav-link  {{request()->is(substr(route('sizes.index', [], false), 1)) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>
+                            Sizes
                         </p>
                     </a>
                 </li>

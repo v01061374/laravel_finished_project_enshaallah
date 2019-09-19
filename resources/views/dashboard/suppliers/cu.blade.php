@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.layouts.master', ['sections' => ['dashboard','Suppliers', isset($supplier)?'Edit':'Create']])
 @section('title')
     @if(isset($supplier))
         Suppliers - Edit
@@ -43,7 +43,8 @@
                             {!! Form::text('title',isset($supplier)?$supplier['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::textarea('address','', ['class' => 'form-control', 'placeholder' => 'Address', 'value' => isset($supplier)?$supplier['address']:'']) !!}
+                            {!! Form::label('address', 'Address'); !!}
+                            {!! Form::textarea('address',isset($supplier)?$supplier['address']:'', ['class' => 'form-control', 'placeholder' => 'Address']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::submit(isset($supplier)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}

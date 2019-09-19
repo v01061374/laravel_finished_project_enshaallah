@@ -26,6 +26,9 @@ Route::get('/', function () {
 });
 
 Route::prefix('dashboard')->group(function (){
+    Route::get('/', function (){
+       return view('dashboard.index');
+    });
     Route::prefix('suppliers')->group(function (){
        Route::get('/', 'SuppliersController@index')->name('suppliers.index');
        Route::get('/create', 'SuppliersController@create')->name('suppliers.create');
@@ -34,4 +37,13 @@ Route::prefix('dashboard')->group(function (){
        Route::post('/update/{id}','SuppliersController@update')->name('suppliers.update');
        Route::get('/delete/{id}','SuppliersController@destroy')->name('suppliers.delete');
     });
+    Route::prefix('sizes')->group(function (){
+        Route::get('/', 'SizesController@index')->name('sizes.index');
+        Route::get('/create', 'SizesController@create')->name('sizes.create');
+        Route::post('/store', 'SizesController@store')->name('sizes.store');
+        Route::get('/edit/{id}','SizesController@edit')->name('sizes.edit');
+        Route::post('/update/{id}','SizesController@update')->name('sizes.update');
+        Route::get('/delete/{id}','SizesController@destroy')->name('sizes.delete');
+    });
+
 });
