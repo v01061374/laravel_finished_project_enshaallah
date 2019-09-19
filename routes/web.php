@@ -61,5 +61,21 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','ProductCategoriesController@update')->name('productCategories.update');
         Route::get('/delete/{id}','ProductCategoriesController@destroy')->name('productCategories.delete');
     });
+    Route::prefix('materialCategories')->group(function (){
+        Route::get('/', 'MaterialCategoriesController@index')->name('materialCategories.index');
+        Route::get('/create', 'MaterialCategoriesController@create')->name('materialCategories.create');
+        Route::post('/store', 'MaterialCategoriesController@store')->name('materialCategories.store');
+        Route::get('/edit/{id}','MaterialCategoriesController@edit')->name('materialCategories.edit');
+        Route::post('/update/{id}','MaterialCategoriesController@update')->name('materialCategories.update');
+        Route::get('/delete/{id}','MaterialCategoriesController@destroy')->name('materialCategories.delete');
+    });
+    Route::prefix('tools')->group(function (){
+        Route::get('/', 'ToolsController@index')->name('tools.index');
+        Route::get('/create', 'ToolsController@create')->name('tools.create');
+        Route::post('/store', 'ToolsController@store')->name('tools.store');
+        Route::get('/edit/{id}','ToolsController@edit')->name('tools.edit');
+        Route::post('/update/{id}','ToolsController@update')->name('tools.update');
+        Route::get('/delete/{id}','ToolsController@destroy')->name('tools.delete');
+    });
 
 });

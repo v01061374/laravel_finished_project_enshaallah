@@ -93,6 +93,16 @@
                 { "orderable": false, "targets":[3]}
             ]
         });
+        $(".materialCategories-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2]}
+            ]
+        });
+        $(".tools-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2]}
+            ]
+        });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };

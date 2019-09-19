@@ -24,7 +24,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-box-open"></i>
                         <p>
@@ -67,8 +67,33 @@
                         </li>
                     </ul>
                 </li>
-
-
+                <li class="nav-item has-treeview ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-vials"></i>
+                        <p>
+                            Materials
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('materialCategories.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('materialCategories.index', [], false), 1))) ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-grip-lines-vertical"></i>
+                                <p>
+                                    Material Categories
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('tools.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('tools.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-tools"></i>
+                        <p>
+                            Tools
+                        </p>
+                    </a>
+                </li>
                 {{--<li class="nav-item has-treeview">--}}
                     {{--<a href="{{route('suppliers.index')}}" class="nav-link">--}}
                         {{--<i class="nav-icon fas fa-chart-pie"></i>--}}
