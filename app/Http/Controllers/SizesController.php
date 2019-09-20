@@ -111,18 +111,10 @@ class SizesController extends Controller
         }
         else{
             $old = Size::find($id);
-            if(
-                $old['title']!=$request['title']
-                ||(isset($request['max_cm_height'])&&$request['max_cm_height']!=$old['max_cm_height'])
-                ||(isset($request['max_cm_width'])&&$request['max_cm_width']!=$old['max_cm_width'])
-                ||(isset($request['max_cm_length'])&&$request['max_cm_length']!=$old['max_cm_length'])
-                ){
-                $old->update([
-                    'title' => $request['title']
-                    ,'max_cm_height' => $request['max_cm_height']
-                    ,'max_cm_width' => $request['max_cm_width']
-                    ,'max_cm_length' => $request['max_cm_length']]
-                );
+            $old->update($request->all());
+            $changes = $old->getChanges();
+            unset($changes['updated_at']);
+            if(count($changes)){
                 $old->save();
                 return redirect()->back()->with('message', 'Update Successful!');
 

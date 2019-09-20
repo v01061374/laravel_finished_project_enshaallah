@@ -7,7 +7,7 @@
     @endif
 @endsection
 @section('body-class')
-    hold-transition sidebar-mini
+    hold-transition layout-fixed sidebar-mini
 @endsection
 
 @section('content')

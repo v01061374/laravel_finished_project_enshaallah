@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('resources/plugins/fontawesome-free/css/all.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('resources/dist/css/adminlte.min.css')}}">
 
@@ -66,6 +67,7 @@
 <script src="{{asset('resources/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('resources/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('resources/dist/js/adminlte.min.js')}}"></script>
 <script>
@@ -101,6 +103,11 @@
         $(".tools-dataTable").dataTable({
             "columnDefs": [
                 { "orderable": false, "targets":[2]}
+            ]
+        });
+        $(".products-dataTable").dataTable({
+            "columnDefs": [
+                // { "orderable": false, "targets":[2]}
             ]
         });
         var set_action = function (clicked) {

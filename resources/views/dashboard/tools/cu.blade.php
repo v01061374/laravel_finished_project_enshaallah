@@ -7,7 +7,7 @@
     @endif
 @endsection
 @section('body-class')
-    hold-transition sidebar-mini
+    hold-transition layout-fixed sidebar-mini
 @endsection
 
 @section('content')
@@ -37,7 +37,8 @@
 
                     </div>
                     <div class="row">
-                        {!! Form::open(['route' => [isset($tool)?'tools.update':'tools.store', isset($tool)?$tool['id']:'']]) !!}
+                        {!! Form::open(['method' => 'POST','route' => [isset($tool)?'tools.update':'tools.store', $tool['id'] ?? '']]) !!}
+                        {{--TODO form model binding to prevent duplicate database call in controller--}}
                         <div class="form-group">
                             {!! Form::label('title', 'Title'); !!}
                             {!! Form::text('title',isset($tool)?$tool['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}

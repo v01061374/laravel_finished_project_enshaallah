@@ -1,6 +1,6 @@
-@extends('dashboard.layouts.master', ['sections' => ['dashboard','MaterialCategories']])
+@extends('dashboard.layouts.master', ['sections' => ['dashboard','Products']])
 @section('title')
-    MaterialCategories
+    Products
 @endsection
 @section('body-class')
     hold-transition layout-fixed sidebar-mini
@@ -21,7 +21,7 @@
                     @endif
                 </div>
                 <div class="row mb-5">
-                    <a href="{{route('materialCategories.create')}}">
+                    <a href="{{route('products.create')}}">
                         <button type="button" class="btn btn-block btn-primary">
                             <i class="far fa-plus-square"></i>
                             Add new
@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-bordered table-hover dataTable materialCategories-dataTable" role="grid">
+                        <table class="table table-bordered table-hover dataTable products-dataTable" role="grid">
                             <thead>
                                 <tr>
                                     <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending" class="sorting_asc">#</th>
@@ -39,19 +39,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($materialCategories as $i => $materialCategory)
+                                @foreach($products as $i => $product)
                                     <tr>
                                         <td class="sorting_1">
                                             {{$i+1}}
                                         </td>
                                         <td>
-                                            {{$materialCategory['title']}}
+                                            {{$product['title']}}
                                         </td>
                                         <td id="row-actions">
                                             <a href="" title="details"><i  style="color: #869099; margin-right: 5px;" class="fas fa-eye"></i></a>
                                                 {{--link to purchase--}}
-                                            <a title="edit" href="{{route('materialCategories.edit', ['id' => \App\CustomClasses\Hasher::encode($materialCategory['id'])])}}"><i style="color: #869099; margin-right: 5px;" class="fas fa-edit"></i></a>
-                                            <i title="delete" class="row-delete fas fa-trash-alt" data-toggle="modal" data-target="#modal-delete" style="color: red; margin-right: 5px; cursor: pointer;" data-action="{{route('materialCategories.delete',\App\CustomClasses\Hasher::encode($materialCategory['id']))}}"></i>
+                                            <a title="edit" href="{{route('products.edit', ['id' => \App\CustomClasses\Hasher::encode($product['id'])])}}"><i style="color: #869099; margin-right: 5px;" class="fas fa-edit"></i></a>
+                                            <i title="delete" class="row-delete fas fa-trash-alt" data-toggle="modal" data-target="#modal-delete" style="color: red; margin-right: 5px; cursor: pointer;" data-action="{{route('products.delete',\App\CustomClasses\Hasher::encode($product['id']))}}"></i>
 
                                         </td>
                                     </tr>

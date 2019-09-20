@@ -3,7 +3,7 @@
     ProductCategories
 @endsection
 @section('body-class')
-    hold-transition sidebar-mini
+    hold-transition layout-fixed sidebar-mini
 @endsection
 
     <!-- Content Wrapper. Contains page content -->

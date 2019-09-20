@@ -5,3 +5,9 @@
     /*background-color: #dc3545!important;*/
 /*}*/
 
+.nav-divider{
+    border-bottom: 1px solid #4f5962;
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+}

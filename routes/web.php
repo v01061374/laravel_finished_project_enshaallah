@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::prefix('dashboard')->group(function (){
     Route::get('/', function (){
        return view('dashboard.index');
-    });
+    })->name('dashboard');
     Route::prefix('suppliers')->group(function (){
        Route::get('/', 'SuppliersController@index')->name('suppliers.index');
        Route::get('/create', 'SuppliersController@create')->name('suppliers.create');
@@ -69,6 +69,8 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','MaterialCategoriesController@update')->name('materialCategories.update');
         Route::get('/delete/{id}','MaterialCategoriesController@destroy')->name('materialCategories.delete');
     });
+
+
     Route::prefix('tools')->group(function (){
         Route::get('/', 'ToolsController@index')->name('tools.index');
         Route::get('/create', 'ToolsController@create')->name('tools.create');
@@ -76,6 +78,14 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/edit/{id}','ToolsController@edit')->name('tools.edit');
         Route::post('/update/{id}','ToolsController@update')->name('tools.update');
         Route::get('/delete/{id}','ToolsController@destroy')->name('tools.delete');
+    });
+    Route::prefix('products')->group(function (){
+        Route::get('/', 'ProductsController@index')->name('products.index');
+        Route::get('/create', 'ProductsController@create')->name('products.create');
+        Route::post('/store', 'ProductsController@store')->name('products.store');
+        Route::get('/edit/{id}','ProductsController@edit')->name('products.edit');
+        Route::post('/update/{id}','ProductsController@update')->name('products.update');
+        Route::get('/delete/{id}','ProductsController@destroy')->name('products.delete');
     });
 
 });

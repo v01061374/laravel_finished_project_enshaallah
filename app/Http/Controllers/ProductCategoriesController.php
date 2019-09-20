@@ -106,8 +106,10 @@ class ProductCategoriesController extends Controller
         }
         else{
             $old = ProductCategory::find($id);
-            if($old['title']!=$request['title']||$request['commission_percent']!=$old['commission_percent']){
-                $old->update(['title' => $request['title'], 'commission_percent' => $request['commission_percent']]);
+            $old->update($request->all());
+            $changes = $old->getChanges();
+            unset($changes['updated_at']);
+            if(count($changes)){
                 $old->save();
                 return redirect()->back()->with('message', 'Update Successful!');
 

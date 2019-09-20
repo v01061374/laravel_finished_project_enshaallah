@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\CustomClasses\Hasher;
-use App\models\Weight;
+use App\models\MaterialCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class WeightsController extends Controller
+class MaterialCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class WeightsController extends Controller
      */
     public function index()
     {
-        $weights = Weight::all()->toArray();
-        return view('dashboard.weights.index', compact('weights'));
+        $materialCategories = MaterialCategory::all()->toArray();
+        return view('dashboard.materialCategories.index', compact('materialCategories'));
     }
 
     /**
@@ -27,7 +27,7 @@ class WeightsController extends Controller
      */
     public function create()
     {
-        return view('dashboard.weights.cu');
+        return view('dashboard.materialCategories.cu');
     }
 
     /**
@@ -39,20 +39,18 @@ class WeightsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'title' => 'required|unique:weights|max:20',
-            'max_gr_weight' => 'required|unique:weights|max:10'
+            'title' => 'required|unique:material_categories|max:20'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $weight = new Weight([
-                'title' => $request['title'],
-                'max_gr_weight' => $request['max_gr_weight']
+            $materialCategory = new MaterialCategory([
+                'title' => $request['title']
             ]);
-            $weight->save();
+            $materialCategory->save();
             return redirect()
-                ->route('weights.index')
+                ->route('materialCategories.index')
 //                should be changed to index page
                 ->with('message', 'Entry Inserted Successfully!');
         }
@@ -61,27 +59,27 @@ class WeightsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Weight  $weight
+     * @param  \App\models\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Weight $weight)
+    public function show(MaterialCategory $materialCategory)
     {
-        // TODO show related products
+        // TODO show related materials
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Weight  $weight
+     * @param  \App\models\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $weight = Weight::findOrFail($id)->toArray();
+        $materialCategory = MaterialCategory::findOrFail($id)->toArray();
 
-        if($weight){
-            $weight['id'] = Hasher::encode($weight['id']);
-            return view('dashboard.weights.cu', compact('weight'));
+        if($materialCategory){
+            $materialCategory['id'] = Hasher::encode($materialCategory['id']);
+            return view('dashboard.materialCategories.cu', compact('materialCategory'));
         }
         else{
             abort(404);
@@ -92,20 +90,19 @@ class WeightsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Weight  $weight
+     * @param  \App\models\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'title' => 'required|max:20|unique:weights,title,'.$id,
-            'max_gr_weight' => 'required|max:10|unique:weights,max_gr_weight,'.$id
+            'title' => 'required|max:20|unique:material_categories,title,'.$id
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $old = Weight::find($id);
+            $old = MaterialCategory::find($id);
             $old->update($request->all());
             $changes = $old->getChanges();
             unset($changes['updated_at']);
@@ -123,14 +120,14 @@ class WeightsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Weight  $weight
+     * @param  \App\models\MaterialCategory  $materialCategory
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $weight = Weight::findOrFail($id);
-        if($weight->toArray()){
-            $weight->delete();
+        $materialCategory = MaterialCategory::findOrFail($id);
+        if($materialCategory->toArray()){
+            $materialCategory->delete();
         }
         else{
             abort(404);

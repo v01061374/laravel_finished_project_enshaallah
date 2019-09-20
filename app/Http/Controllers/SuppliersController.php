@@ -118,8 +118,10 @@ class SuppliersController extends Controller
         }
         else{
             $old = Supplier::find($id);
-            if($old['title']!=$request['title']||(isset($request['address'])&&$request['address']!=$old['address'])){
-                $old->update(['title' => $request['title'], 'address' => $request['address']]);
+            $old->update($request->all());
+            $changes = $old->getChanges();
+            unset($changes['updated_at']);
+            if(count($changes)){
                 $old->save();
                 return redirect()->back()->with('message', 'Update Successful!');
 
