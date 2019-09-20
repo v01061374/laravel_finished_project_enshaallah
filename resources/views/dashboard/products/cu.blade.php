@@ -37,7 +37,7 @@
 
                     </div>
                     <div class="row">
-                        {!! Form::open( ['route' => [isset($product)?'products.update':'products.store', isset($product)?$product['id']:'','files' => 'true', 'enctype' => 'multipart/form-data']]) !!}
+                        {!! Form::open( ['route' => [isset($product)?'products.update':'products.store', isset($product)?$product['id']:'']]) !!}
                         <div class="form-group">
                             {!! Form::label('title', 'Title'); !!}
                             {!! Form::text('title',isset($product)?$product['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}

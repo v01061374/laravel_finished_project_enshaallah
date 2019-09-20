@@ -19,6 +19,17 @@ class ProductsController extends Controller
         }
         return $out;
     }
+    private function decodeRequest(Request $request, $encoded_columns){
+        if(is_array($encoded_columns)){
+            foreach ($encoded_columns as $column){
+                $request[$column] = Hasher::decode($request[$column]);
+            }
+            return $request;
+        }
+        else{
+            $request[$encoded_columns] = Hasher::decode($request[$encoded_columns]);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -67,6 +78,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         // TODO add type validation to all models
+        // TODO add related materials
         $validator = Validator::make($request->all(),[
             'title' => 'required|unique:products|max:20',
             'avg_minute_prod_time' => 'required',
@@ -150,12 +162,17 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'title' => 'required|max:20|unique:material_categories,title,'.$id
+            'title' => 'required|max:20|unique:products,title,'.$id,
+            'avg_minute_prod_time' => 'required',
+            'size_id' => 'required',
+            'weight_id' => 'required',
+            'category_id' => 'required'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
+            $request = $this->decodeRequest($request, ['size_id', 'weight_id', 'category_id']);
             $old = Product::find($id);
             $old->update($request->all());
             $changes = $old->getChanges();
