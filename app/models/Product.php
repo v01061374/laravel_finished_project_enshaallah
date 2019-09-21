@@ -4,6 +4,7 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Product extends Model
 {
     protected $table = 'products';
@@ -12,7 +13,7 @@ class Product extends Model
         'id'
     ];
     public function category(){
-        $this->belongsTo('app\models\Category', 'category_id');
+        return $this->belongsTo('App\models\ProductCategory', 'category_id');
     }
     public function subProduct(){
         return $this->belongsToMany('app\models\Product'

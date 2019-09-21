@@ -107,7 +107,7 @@
         });
         $(".products-dataTable").dataTable({
             "columnDefs": [
-                // { "orderable": false, "targets":[2]}
+                { "orderable": false, "targets":[3,4]}
             ]
         });
         var set_action = function (clicked) {

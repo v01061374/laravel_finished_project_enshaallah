@@ -35,6 +35,8 @@
                                 <tr>
                                     <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending" class="sorting_asc">#</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Title</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Category</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Image</th>
                                     <th tabindex="0" rowspan="1" colspan="1">Actions</th>
                                 </tr>
                             </thead>
@@ -46,6 +48,14 @@
                                         </td>
                                         <td>
                                             {{$product['title']}}
+                                        </td>
+                                        <td>
+                                            {{$product['category']['title']}}
+                                        </td>
+                                        <td>
+                                            @if($product['image'])
+                                                <img src="{{asset($product['image'])}}" alt="" class="thumbnail" style="width:200px;">
+                                            @endif
                                         </td>
                                         <td id="row-actions">
                                             <a href="" title="details"><i  style="color: #869099; margin-right: 5px;" class="fas fa-eye"></i></a>
@@ -59,9 +69,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Actions</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending" class="sorting_asc">#</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Title</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Category</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Image</th>
+                                    <th tabindex="0" rowspan="1" colspan="1">Actions</th>
                                 </tr>
                             </tfoot>
                         </table>

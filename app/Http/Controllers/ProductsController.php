@@ -51,7 +51,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = Product::all()->toArray();
+        $products = Product::with('category')->get()->toArray();
         return view('dashboard.products.index', compact('products'));
     }
 
