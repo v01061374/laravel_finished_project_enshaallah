@@ -12,6 +12,6 @@ class MaterialCategory extends Model
         'id'
     ];
     public function materials(){
-        return $this->hasMany('app\models\Material');
+        return $this->hasMany('App\models\Material');
     }
 }

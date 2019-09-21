@@ -12,10 +12,10 @@ class Material extends Model
         'id'
     ];
     public function category(){
-        return $this->belongsTo('app\models\MaterialCategory', 'category_id');
+        return $this->belongsTo('App\models\MaterialCategory', 'category_id');
     }
     public function product(){
-        return $this->belongsToMany('app\models\Product'
+        return $this->belongsToMany('App\models\Product'
             ,'material_product', 'ma_id', 'pr_id');
     }
 }

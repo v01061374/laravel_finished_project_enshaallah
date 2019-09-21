@@ -12,6 +12,6 @@ class Size extends Model
         'id'
     ];
     public function products(){
-        $this->hasMany('app\models\Product');
+        $this->hasMany('App\models\Product');
     }
 }

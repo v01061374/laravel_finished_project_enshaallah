@@ -12,6 +12,6 @@ class Sell extends Model
         'id'
     ];
     public function receipt(){
-        return $this->belongsTo('app\models\Receipt');
+        return $this->belongsTo('App\models\Receipt');
     }
 }

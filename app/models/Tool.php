@@ -12,6 +12,6 @@ class Tool extends Model
         'id'
     ];
     public function stocks(){
-        return $this->belongsToMany('app\models\Stock');
+        return $this->belongsToMany('App\models\Stock');
     }
 }

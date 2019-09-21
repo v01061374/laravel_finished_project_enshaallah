@@ -110,6 +110,11 @@
                 { "orderable": false, "targets":[3,4]}
             ]
         });
+        $(".materials-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[3]}
+            ]
+        });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };

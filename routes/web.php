@@ -87,5 +87,13 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','ProductsController@update')->name('products.update');
         Route::get('/delete/{id}','ProductsController@destroy')->name('products.delete');
     });
+    Route::prefix('materials')->group(function (){
+        Route::get('/', 'MaterialsController@index')->name('materials.index');
+        Route::get('/create', 'MaterialsController@create')->name('materials.create');
+        Route::post('/store', 'MaterialsController@store')->name('materials.store');
+        Route::get('/edit/{id}','MaterialsController@edit')->name('materials.edit');
+        Route::post('/update/{id}','MaterialsController@update')->name('materials.update');
+        Route::get('/delete/{id}','MaterialsController@destroy')->name('materials.delete');
+    });
 
 });

@@ -12,24 +12,24 @@ class Purchase extends Model
         'id'
     ];
     public function materials(){
-        return $this->belongsToMany('app\models\Material'
+        return $this->belongsToMany('App\models\Material'
             , 'material_purchase'
             , 'pu_id'
             , 'ma_id');
     }
     public function products(){
-        return $this->belongsToMany('app\models\Product'
+        return $this->belongsToMany('App\models\Product'
             , 'material_purchase'
             , 'pu_id'
             , 'pr_id');
     }
     public function tools(){
-        return $this->belongsToMany('app\models\Tool'
+        return $this->belongsToMany('App\models\Tool'
             , 'material_purchase'
             , 'pu_id'
             , 'to_id');
     }
     public function supplier(){
-        $this->belongsTo('app\models\Supplier');
+        $this->belongsTo('App\models\Supplier');
     }
 }

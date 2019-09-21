@@ -61,8 +61,7 @@
                 </li>
                 <li class="nav-divider"></li>
                 <li class="nav-item has-treeview ">
-                    <a href="#" class="nav-link">
-                        {{--TODO add material link--}}
+                    <a href="{{route('materials.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-vials"></i>
                         <p>
                             Materials

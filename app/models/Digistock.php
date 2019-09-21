@@ -12,6 +12,6 @@ class Digistock extends Model
         'id'
     ];
     public function packages(){
-        return $this->hasMany('app\models\Package');
+        return $this->hasMany('App\models\Package');
     }
 }

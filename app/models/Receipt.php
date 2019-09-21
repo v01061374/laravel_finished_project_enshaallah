@@ -12,7 +12,7 @@ class Receipt extends Model
         'id'
     ];
     public function sells(){
-        return $this->hasMany('app\models\Sell');
+        return $this->hasMany('App\models\Sell');
     }
 
 }

@@ -12,6 +12,6 @@ class Supplier extends Model
         'id'
     ];
     public function purchases(){
-        $this->hasMany('app\models\Purchase');
+        $this->hasMany('App\models\Purchase');
     }
 }
