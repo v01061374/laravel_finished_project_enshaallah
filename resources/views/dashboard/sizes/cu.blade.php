@@ -64,7 +64,7 @@
                             {!! Form::number('max_cm_length',isset($size)?$size['max_cm_length']:'', ['class' => 'form-control', 'placeholder' => 'Max length (cm)']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($supplier)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($supplier)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

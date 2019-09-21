@@ -47,7 +47,7 @@
                             {!! Form::number('max_gr_weight',isset($weight)?$weight['max_gr_weight']:'', ['class' => 'form-control', 'placeholder' => 'Max Weight (gr)']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($weight)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($weight)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

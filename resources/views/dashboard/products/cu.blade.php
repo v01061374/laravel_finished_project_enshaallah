@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($product)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($product)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

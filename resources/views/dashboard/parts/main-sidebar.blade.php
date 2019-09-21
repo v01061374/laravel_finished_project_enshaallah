@@ -94,6 +94,24 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-divider"></li>
+                <li class="nav-item">
+                    <a href="{{route('stocks.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('stocks.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-dolly"></i>
+                        <p>
+                            Stocks
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-divider"></li>
+                <li class="nav-item">
+                    <a href="{{route('purchases.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('purchases.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>
+                            Purchases
+                        </p>
+                    </a>
+                </li>
             </ul>
 
         </nav>

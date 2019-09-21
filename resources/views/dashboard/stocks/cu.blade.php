@@ -1,9 +1,9 @@
-@extends('dashboard.layouts.master', ['sections' => ['dashboard','Tools', isset($tool)?'Edit':'Create']])
+@extends('dashboard.layouts.master', ['sections' => ['dashboard','Stocks', isset($stock)?'Edit':'Create']])
 @section('title')
-    @if(isset($tool))
-        Tools - Edit
+    @if(isset($stock))
+        Stocks - Edit
     @else
-        Tools - Create
+        Stocks - Create
     @endif
 @endsection
 @section('body-class')
@@ -37,14 +37,14 @@
 
                     </div>
                     <div class="row">
-                        {!! Form::open(['method' => 'POST','route' => [isset($tool)?'tools.update':'tools.store', $tool['id'] ?? '']]) !!}
+                        {!! Form::open(['method' => 'POST','route' => [isset($stock)?'stocks.update':'stocks.store', $stock['id'] ?? '']]) !!}
                         {{--TODO form model binding to prevent duplicate database call in controller--}}
                         <div class="form-group">
                             {!! Form::label('title', 'Title'); !!}
-                            {!! Form::text('title',isset($tool)?$tool['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}
+                            {!! Form::text('title',isset($stock)?$stock['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($tool)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($stock)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

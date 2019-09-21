@@ -95,5 +95,21 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','MaterialsController@update')->name('materials.update');
         Route::get('/delete/{id}','MaterialsController@destroy')->name('materials.delete');
     });
+    Route::prefix('stocks')->group(function (){
+        Route::get('/', 'StocksController@index')->name('stocks.index');
+        Route::get('/create', 'StocksController@create')->name('stocks.create');
+        Route::post('/store', 'StocksController@store')->name('stocks.store');
+        Route::get('/edit/{id}','StocksController@edit')->name('stocks.edit');
+        Route::post('/update/{id}','StocksController@update')->name('stocks.update');
+        Route::get('/delete/{id}','StocksController@destroy')->name('stocks.delete');
+    });
+    Route::prefix('purchases')->group(function (){
+        Route::get('/', 'PurchasesController@index')->name('purchases.index');
+        Route::get('/create', 'PurchasesController@create')->name('purchases.create');
+        Route::post('/store', 'PurchasesController@store')->name('purchases.store');
+        Route::get('/edit/{id}','PurchasesController@edit')->name('purchases.edit');
+        Route::post('/update/{id}','PurchasesController@update')->name('purchases.update');
+        Route::get('/delete/{id}','PurchasesController@destroy')->name('purchases.delete');
+    });
 
 });

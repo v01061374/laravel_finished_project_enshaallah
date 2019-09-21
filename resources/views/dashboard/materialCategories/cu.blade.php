@@ -43,7 +43,7 @@
                             {!! Form::text('title',isset($materialCategory)?$materialCategory['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($materialCategory)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($materialCategory)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

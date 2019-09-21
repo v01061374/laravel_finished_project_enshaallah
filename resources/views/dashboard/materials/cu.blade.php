@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::submit(isset($material)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($material)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

@@ -47,7 +47,7 @@
                             {!! Form::number('commission_percent',isset($productCategory)?$productCategory['commission_percent']:'', ['class' => 'form-control', 'placeholder' => 'Commission (%)', 'min' => 0, 'max' => 100]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($productCategory)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($productCategory)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

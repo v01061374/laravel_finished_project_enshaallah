@@ -47,7 +47,7 @@
                             {!! Form::textarea('address',isset($supplier)?$supplier['address']:'', ['class' => 'form-control', 'placeholder' => 'Address']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit(isset($supplier)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(isset($supplier)?'Update!':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>
                     </div>
                     <!-- /.row -->

@@ -115,6 +115,16 @@
                 { "orderable": false, "targets":[3]}
             ]
         });
+        $(".stocks-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2]}
+            ]
+        });
+        $(".purchases-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[4]}
+            ]
+        });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };

@@ -30,6 +30,6 @@ class Purchase extends Model
             , 'to_id');
     }
     public function supplier(){
-        $this->belongsTo('App\models\Supplier');
+        return $this->belongsTo('App\models\Supplier');
     }
 }
