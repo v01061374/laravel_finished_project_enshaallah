@@ -58,9 +58,11 @@
                             {!! Form::label('category_id', 'Category'); !!}
                             {!! Form::select('category_id',$productCategories,isset($product)?$product['category_id']:'',['required'=>'required', 'class' => 'form-control']) !!}
                         </div>
+                        @isset($product)
                         <img src="{{asset($product['image'])}}" alt="" class="img-thumbnail" style="width:200px;">
                         {{--TODO add image delete button--}}
-                        <div class="form-group" >
+                        @endisset
+                        <div class="form-group">
                             {!! Form::label('image', 'Image'); !!}
                             <div class="input-group">
                                 <div class="custom-file">
@@ -68,9 +70,7 @@
                                     {!! Form::label('image', 'Image', ['class' => 'custom-file-label']); !!}
                                 </div>
                             </div>
-
                         </div>
-
                         <div class="form-group">
                             {!! Form::submit(isset($product)?'update':'Submit!', ['class' => 'btn btn-primary']) !!}
                         </div>

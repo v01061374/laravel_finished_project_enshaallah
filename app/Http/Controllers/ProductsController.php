@@ -103,13 +103,14 @@ class ProductsController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $product = new Product([
-                'title' => $request['title'],
-                'avg_minute_prod_time' => $request['avg_minute_prod_time'],
-                'size_id' => Hasher::decode($request['size_id']),
-                'weight_id' => Hasher::decode($request['weight_id']),
-                'category_id' => Hasher::decode($request['category_id'])
-            ]);
+            $request = $this->decodeRequest($request, ['size_id', 'weight_id', 'category_id']);
+            $product = new Product();
+            $product->fill($request->all(['title', 'avg_minute_prod_time', 'size_id', 'weight_id', 'category_id']));
+            // TODO improve upload consequence
+            $image = $this->getUploadedImagePath($request);
+            if($image){
+                $product->fill(['image'=>$image]);
+            }
             $product->save();
             return redirect()
                 ->route('products.index')
