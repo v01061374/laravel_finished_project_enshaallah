@@ -33,6 +33,7 @@
                         <table class="table table-bordered table-hover dataTable products-dataTable" role="grid">
                             <thead>
                                 <tr>
+                                    {{--TODO add individual column search--}}
                                     <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending" class="sorting_asc">#</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Title</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Category</th>
