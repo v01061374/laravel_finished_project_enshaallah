@@ -125,6 +125,11 @@
                 { "orderable": false, "targets":[4]}
             ]
         });
+        $(".receipts-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[5]}
+            ]
+        });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };

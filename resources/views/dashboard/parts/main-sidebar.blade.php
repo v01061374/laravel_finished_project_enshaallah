@@ -112,6 +112,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-divider"></li>
+                <li class="nav-item">
+                    <a href="{{route('receipts.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('receipts.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-receipt"></i>
+                        <p>
+                            Receipts
+                        </p>
+                    </a>
+                </li>
             </ul>
 
         </nav>

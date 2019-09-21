@@ -111,5 +111,13 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','PurchasesController@update')->name('purchases.update');
         Route::get('/delete/{id}','PurchasesController@destroy')->name('purchases.delete');
     });
+    Route::prefix('receipts')->group(function (){
+        Route::get('/', 'ReceiptsController@index')->name('receipts.index');
+        Route::get('/create', 'ReceiptsController@create')->name('receipts.create');
+        Route::post('/store', 'ReceiptsController@store')->name('receipts.store');
+        Route::get('/edit/{id}','ReceiptsController@edit')->name('receipts.edit');
+        Route::post('/update/{id}','ReceiptsController@update')->name('receipts.update');
+        Route::get('/delete/{id}','ReceiptsController@destroy')->name('receipts.delete');
+    });
 
 });

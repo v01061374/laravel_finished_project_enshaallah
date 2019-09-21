@@ -3,33 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\CustomClasses\Hasher;
-use App\models\Purchase;
+use App\models\Receipt;
 
-use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class PurchasesController extends Controller
+class ReceiptsController extends Controller
 {
-    // TODO transfer hash functions to Hasher class
-    private function generateEncodedSelectArray(Array $array){
-        $out = [];
-        foreach ($array as $item){
-            $out[Hasher::encode($item['id'])] = $item['title'];
-        }
-        return $out;
-    }
-    private function decodeRequest(Request $request, $encoded_columns){
-        if(is_array($encoded_columns)){
-            foreach ($encoded_columns as $column){
-                $request[$column] = Hasher::decode($request[$column]);
-            }
-            return $request;
-        }
-        else
-            $request[$encoded_columns] = Hasher::decode($request[$encoded_columns]);
-        return $request;
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -39,8 +20,8 @@ class PurchasesController extends Controller
 
     public function index()
     {
-        $purchases = Purchase::with('supplier')->get()->toArray();
-        return view('dashboard.purchases.index', compact('purchases'));
+        $receipts = Receipt::all()->toArray();
+        return view('dashboard.receipts.index', compact('receipts'));
     }
 
     /**
@@ -51,13 +32,7 @@ class PurchasesController extends Controller
 
     public function create()
     {
-        $supplier =
-            $this->generateEncodedSelectArray(
-                Supplier::all(['id', 'title'])->toArray()
-            )
-        ;
-
-        return view('dashboard.purchases.cu', compact('supplier'));
+        return view('dashboard.receipts.cu');
     }
 
     /**
@@ -69,22 +44,19 @@ class PurchasesController extends Controller
     public function store(Request $request)
     {
         // TODO add type validation to all models
-        // TODO add related purchases
+        // TODO add related receipts
         $validator = Validator::make($request->all(),[
-            'date' => 'required|date',
-            'supplier_id' => 'required',
-
+            'payment_date' => 'required|date'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $request = $this->decodeRequest($request, 'supplier_id');
-            $purchase = new Purchase();
-            $purchase->fill($request->all());
-            $purchase->save();
+            $receipt = new Receipt();
+            $receipt->fill($request->all());
+            $receipt->save();
             return redirect()
-                ->route('purchases.index')
+                ->route('receipts.index')
 //                should be changed to index page
                 ->with('message', 'Entry Inserted Successfully!');
         }
@@ -93,32 +65,27 @@ class PurchasesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Purchase  $purchase
+     * @param  \App\models\Receipt  $receipt
      * @return \Illuminate\Http\Response
      */
-    public function show(Purchase $purchase)
+    public function show(Receipt $receipt)
     {
-        // TODO show related purchases
+        // TODO show related receipts
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Purchase  $purchase
+     * @param  \App\models\Receipt  $receipt
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $purchase = Purchase::findOrFail($id)->toArray();
+        $receipt = Receipt::findOrFail($id)->toArray();
 
-        if($purchase){
-            $suppliers =
-                $this->generateEncodedSelectArray(
-                    Supplier::all(['id', 'title'])->toArray()
-                )
-            ;
-            $purchase['id'] = Hasher::encode($purchase['id']);
-            return view('dashboard.purchases.cu', compact(['purchase', 'suppliers']));
+        if($receipt){
+            $receipt['id'] = Hasher::encode($receipt['id']);
+            return view('dashboard.receipts.cu', compact(['receipt']));
         }
         else{
             abort(404);
@@ -129,21 +96,19 @@ class PurchasesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Purchase  $purchase
+     * @param  \App\models\Receipt  $receipt
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'date' => 'required|date',
-            'supplier_id' => 'required',
+            'payment_date' => 'required|date'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $old = Purchase::find($id);
-            $request = $this->decodeRequest($request, 'supplier_id');
+            $old = Receipt::find($id);
             $old->update($request->all());
             $changes = $old->getChanges();
             unset($changes['updated_at']);
@@ -161,14 +126,14 @@ class PurchasesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Purchase  $purchase
+     * @param  \App\models\Receipt  $receipt
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $purchase = Purchase::findOrFail($id);
-        if($purchase->toArray()){
-            $purchase->delete();
+        $receipt = Receipt::findOrFail($id);
+        if($receipt->toArray()){
+            $receipt->delete();
         }
         else{
             abort(404);
