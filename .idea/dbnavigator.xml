@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="444110ed-8a12-4ba0-9396-3df7e1f9d38f">
-        <schema name="stock_management" object-types="table, function, procedure, view" />
+        <schema name="stock_management" object-types="constraint, column, function, index, procedure, table, view, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
@@ -39,6 +39,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="444110ed-8a12-4ba0-9396-3df7e1f9d38f" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-list connection-id="444110ed-8a12-4ba0-9396-3df7e1f9d38f" dataset="stock_management.products" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

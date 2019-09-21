@@ -37,7 +37,7 @@
 
                     </div>
                     <div class="row">
-                        {!! Form::open( ['route' => [isset($product)?'products.update':'products.store', isset($product)?$product['id']:'']]) !!}
+                        {!! Form::open( ['route' => [isset($product)?'products.update':'products.store', isset($product)?$product['id']:''], 'files' => true]) !!}
                         <div class="form-group">
                             {!! Form::label('title', 'Title'); !!}
                             {!! Form::text('title',isset($product)?$product['title']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Title' ]) !!}
@@ -58,7 +58,9 @@
                             {!! Form::label('category_id', 'Category'); !!}
                             {!! Form::select('category_id',$productCategories,isset($product)?$product['category_id']:'',['required'=>'required', 'class' => 'form-control']) !!}
                         </div>
-                        <div class="form-group">
+                        <img src="{{asset($product['image'])}}" alt="" class="img-thumbnail" style="width:200px;">
+                        {{--TODO add image delete button--}}
+                        <div class="form-group" >
                             {!! Form::label('image', 'Image'); !!}
                             <div class="input-group">
                                 <div class="custom-file">

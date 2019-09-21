@@ -30,6 +30,19 @@ class ProductsController extends Controller
             $request[$encoded_columns] = Hasher::decode($request[$encoded_columns]);
         }
     }
+    private function getUploadedImagePath(Request $request){
+        // TODO specify disk
+        // TODO delete old image
+        $img = $request->file('image');
+        if($img){
+            $path = $img->store('assets/images/products', 'public' );
+
+            return $path;
+        }
+        else{
+            return null;
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -90,7 +103,6 @@ class ProductsController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-//            dd($_FILES);
             $product = new Product([
                 'title' => $request['title'],
                 'avg_minute_prod_time' => $request['avg_minute_prod_time'],
@@ -164,6 +176,7 @@ class ProductsController extends Controller
         $validator = Validator::make($request->all(),[
             'title' => 'required|max:20|unique:products,title,'.$id,
             'avg_minute_prod_time' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'size_id' => 'required',
             'weight_id' => 'required',
             'category_id' => 'required'
@@ -172,12 +185,17 @@ class ProductsController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            $request = $this->decodeRequest($request, ['size_id', 'weight_id', 'category_id']);
             $old = Product::find($id);
+            $request = $this->decodeRequest($request, ['size_id', 'weight_id', 'category_id']);
             $old->update($request->all());
+            $image = $this->getUploadedImagePath($request);
+            if($image){
+                $old->update(['image'=>$image]);
+            }
             $changes = $old->getChanges();
             unset($changes['updated_at']);
             if(count($changes)){
+
                 $old->save();
                 return redirect()->back()->with('message', 'Update Successful!');
 
