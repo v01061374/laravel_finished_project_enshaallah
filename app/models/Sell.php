@@ -11,6 +11,9 @@ class Sell extends Model
     protected $guarded =[
         'id'
     ];
+    public function product(){
+        return $this->belongsTo('App\models\Product', 'prod_id');
+    }
     public function receipt(){
         return $this->belongsTo('App\models\Receipt');
     }

@@ -19,9 +19,9 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        @error('title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
                     </div>
                     <div class="row">
                         @if(session()->has('message'))
@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('supplier_id', 'Supplier'); !!}
-                            {!! Form::select('supplier_id',$suppliers,isset($purchase)?$purchase['supplier_id']:'',['required'=>'required', 'class' => 'form-control']) !!}
+                            {!! Form::select('supplier_id',$suppliers,isset($purchase)?\App\CustomClasses\Hasher::encode($purchase['supplier_id']):'',['required'=>'required', 'class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">

@@ -103,6 +103,15 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{route('digiStocks.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('digiStocks.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-dolly-flatbed"></i>
+                        <p>
+                            Digi Stocks
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-divider"></li>
                 <li class="nav-item">
                     <a href="{{route('purchases.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('purchases.index', [], false), 1))) ? 'active' : ''}}">
@@ -118,6 +127,23 @@
                         <i class="nav-icon fas fa-receipt"></i>
                         <p>
                             Receipts
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-divider"></li>
+                <li class="nav-item">
+                    <a href="{{route('sells.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('sells.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p>
+                            Sells
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('packages.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('packages.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-motorcycle"></i>
+                        <p>
+                            Packages
                         </p>
                     </a>
                 </li>

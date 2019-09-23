@@ -22,7 +22,9 @@ class PurchasesController extends Controller
     private function decodeRequest(Request $request, $encoded_columns){
         if(is_array($encoded_columns)){
             foreach ($encoded_columns as $column){
-                $request[$column] = Hasher::decode($request[$column]);
+                if($request[$column]){
+                    $request[$column] = Hasher::decode($request[$column]);
+                }
             }
             return $request;
         }

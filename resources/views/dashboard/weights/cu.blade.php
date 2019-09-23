@@ -19,9 +19,9 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        @error('title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
                     </div>
                     <div class="row">
                         @if(session()->has('message'))

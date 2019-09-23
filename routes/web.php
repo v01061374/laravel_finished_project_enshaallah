@@ -119,5 +119,29 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','ReceiptsController@update')->name('receipts.update');
         Route::get('/delete/{id}','ReceiptsController@destroy')->name('receipts.delete');
     });
+    Route::prefix('sells')->group(function (){
+        Route::get('/', 'SellsController@index')->name('sells.index');
+        Route::get('/create', 'SellsController@create')->name('sells.create');
+        Route::post('/store', 'SellsController@store')->name('sells.store');
+        Route::get('/edit/{id}','SellsController@edit')->name('sells.edit');
+        Route::post('/update/{id}','SellsController@update')->name('sells.update');
+        Route::get('/delete/{id}','SellsController@destroy')->name('sells.delete');
+    });
+    Route::prefix('digiStocks')->group(function (){
+        Route::get('/', 'DigiStocksController@index')->name('digiStocks.index');
+        Route::get('/create', 'DigiStocksController@create')->name('digiStocks.create');
+        Route::post('/store', 'DigiStocksController@store')->name('digiStocks.store');
+        Route::get('/edit/{id}','DigiStocksController@edit')->name('digiStocks.edit');
+        Route::post('/update/{id}','DigiStocksController@update')->name('digiStocks.update');
+        Route::get('/delete/{id}','DigiStocksController@destroy')->name('digiStocks.delete');
+    });
+    Route::prefix('packages')->group(function (){
+        Route::get('/', 'PackagesController@index')->name('packages.index');
+        Route::get('/create', 'PackagesController@create')->name('packages.create');
+        Route::post('/store', 'PackagesController@store')->name('packages.store');
+        Route::get('/edit/{id}','PackagesController@edit')->name('packages.edit');
+        Route::post('/update/{id}','PackagesController@update')->name('packages.update');
+        Route::get('/delete/{id}','PackagesController@destroy')->name('packages.delete');
+    });
 
 });

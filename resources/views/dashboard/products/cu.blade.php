@@ -19,9 +19,9 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        @error('title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
                     </div>
                     <div class="row">
                         @if(session()->has('message'))
@@ -52,11 +52,11 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('weight_id', 'Weight'); !!}
-                            {!! Form::select('weight_id',$weights,isset($product)?$product['weight_id']:'',['required'=>'required', 'class' => 'form-control']) !!}
+                            {!! Form::select('weight_id',$weights,isset($product)?\App\CustomClasses\Hasher::encode($product['weight_id']):'',['required'=>'required', 'class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('category_id', 'Category'); !!}
-                            {!! Form::select('category_id',$productCategories,isset($product)?$product['category_id']:'',['required'=>'required', 'class' => 'form-control']) !!}
+                            {!! Form::select('category_id',$productCategories,isset($product)?\App\CustomClasses\Hasher::encode($product['category_id']):'',['required'=>'required', 'class' => 'form-control']) !!}
                         </div>
                         @isset($product)
                         <img src="{{asset($product['image'])}}" alt="" class="img-thumbnail" style="width:200px;">

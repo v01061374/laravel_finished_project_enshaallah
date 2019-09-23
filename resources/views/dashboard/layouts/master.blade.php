@@ -130,6 +130,21 @@
                 { "orderable": false, "targets":[5]}
             ]
         });
+        $(".sells-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[5]}
+            ]
+        });
+        $(".digiStocks-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2]}
+            ]
+        });
+        $(".packages-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2]}
+            ]
+        });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };

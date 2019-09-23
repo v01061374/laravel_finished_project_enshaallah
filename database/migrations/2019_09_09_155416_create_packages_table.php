@@ -13,6 +13,7 @@ class CreatePackagesTable extends Migration
      */
     public function up()
     {
+
         Schema::create('packages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('acceptance_date');

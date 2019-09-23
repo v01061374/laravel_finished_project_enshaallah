@@ -12,7 +12,7 @@ class Package extends Model
         'id'
     ];
     public function digi_stock(){
-        return $this->belongsTo('App\models\DigiStock');
+        return $this->belongsTo('App\models\DigiStock', 'stock_id');
     }
     public function products(){
         return $this->belongsToMany(
