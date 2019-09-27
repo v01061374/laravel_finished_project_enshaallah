@@ -143,5 +143,13 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','PackagesController@update')->name('packages.update');
         Route::get('/delete/{id}','PackagesController@destroy')->name('packages.delete');
     });
+    Route::prefix('configs')->group(function (){
+        Route::get('/', 'ConfigsController@index')->name('configs.index');
+        Route::get('/create', 'ConfigsController@create')->name('configs.create');
+        Route::post('/store', 'ConfigsController@store')->name('configs.store');
+        Route::get('/edit/{id}','ConfigsController@edit')->name('configs.edit');
+        Route::post('/update/{id}','ConfigsController@update')->name('configs.update');
+        Route::get('/delete/{id}','ConfigsController@destroy')->name('configs.delete');
+    });
 
 });

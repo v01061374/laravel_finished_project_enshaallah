@@ -42,12 +42,12 @@
                     <div class="row">
                         {!! Form::open( ['route' => [isset($package)?'packages.update':'packages.store', isset($package)?$package['id']:''], 'files' => true]) !!}
                         <div class="form-group">
-                            {!! Form::label('expectation_date', 'Expectation Date'); !!}
-                            {!! Form::date('expectation_date',isset($package)?$package['expectation_date']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Expectation Date' ]) !!}
-                        </div>
-                        <div class="form-group">
                             {!! Form::label('acceptance_date', 'Acceptance Date'); !!}
                             {!! Form::date('acceptance_date',isset($package)?$package['acceptance_date']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Acceptance Date' ]) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('expectation_date', 'Expectation Date'); !!}
+                            {!! Form::date('expectation_date',isset($package)?$package['expectation_date']:'',['required'=>'required', 'class' => 'form-control', 'placeholder' => 'Expectation Date' ]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('package_number', 'Package Number'); !!}

@@ -147,6 +147,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-divider"></li>
+                <li class="nav-item">
+                    <a href="{{route('configs.index')}}" class="nav-link  {{(strpos(request()->getUri(), substr(route('configs.index', [], false), 1))) ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-question"></i>
+                        <p>
+                            Configs
+                        </p>
+                    </a>
+                </li>
             </ul>
 
         </nav>

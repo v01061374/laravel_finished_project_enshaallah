@@ -145,6 +145,11 @@
                 { "orderable": false, "targets":[2]}
             ]
         });
+        $(".configs-dataTable").dataTable({
+            "columnDefs": [
+                { "orderable": false, "targets":[2]}
+            ]
+        });
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };
