@@ -38,7 +38,7 @@
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Date</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Supplier</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Side Costs</th>
-                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Total Cost</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" class="sorting">Total Price</th>
                                     <th tabindex="0" rowspan="1" colspan="1">Actions</th>
                                 </tr>
                             </thead>
@@ -58,8 +58,7 @@
                                             {{$purchase['side_costs']}}
                                         </td>
                                         <td>
-                                            {{"later!!"}}
-                                            {{--TODO calculate total costs--}}
+                                            {{$purchase['total_price']}}
                                         </td>
                                         <td id="row-actions">
                                             <a href="" title="details"><i  style="color: #869099; margin-right: 5px;" class="fas fa-eye"></i></a>

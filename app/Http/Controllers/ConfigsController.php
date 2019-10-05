@@ -66,10 +66,10 @@ class ConfigsController extends Controller
      * @param  \App\models\Config $config
      * @return \Illuminate\Http\Response
      */
-    public function show(Config $config)
-    {
-        // TODO show related materials
-    }
+//    public function show(Config $config)
+//    {
+//
+//    }
 
     /**
      * Show the form for editing the specified resource.

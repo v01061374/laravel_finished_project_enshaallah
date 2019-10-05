@@ -106,7 +106,7 @@ class PackagesController extends Controller
      */
     public function show(Package $package)
     {
-        // TODO show related materials
+        // TODO show related products
     }
 
     /**

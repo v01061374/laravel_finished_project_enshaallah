@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{{asset('resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <link rel="stylesheet" href="{{asset('resources/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('resources/dist/css/adminlte.min.css')}}">
 
@@ -68,6 +70,7 @@
 <script src="{{asset('resources/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src="{{asset('resources/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('resources/dist/js/adminlte.min.js')}}"></script>
 <script>
@@ -153,6 +156,7 @@
         var set_action = function (clicked) {
             window.ajax_action=clicked.getAttribute('data-action');
         };
+
         $('.row-delete').on('click', function(){
             $this = this;
             $.when(set_action($this)).done(function () {
@@ -174,8 +178,10 @@
                 })
             })
         })
+
     });
 
 </script>
+    @yield('scripts')
 </body>
 </html>

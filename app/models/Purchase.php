@@ -19,13 +19,13 @@ class Purchase extends Model
     }
     public function products(){
         return $this->belongsToMany('App\models\Product'
-            , 'material_purchase'
+            , 'product_purchase'
             , 'pu_id'
-            , 'pr_id');
+            , 'pr_id')->withPivot(['unit_price', 'qty']);;
     }
     public function tools(){
         return $this->belongsToMany('App\models\Tool'
-            , 'material_purchase'
+            , 'tool_purchase'
             , 'pu_id'
             , 'to_id');
     }
