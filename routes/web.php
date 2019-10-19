@@ -104,13 +104,18 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/delete/{id}','StocksController@destroy')->name('stocks.delete');
     });
     Route::prefix('purchases')->group(function (){
+
         Route::get('/', 'PurchasesController@index')->name('purchases.index');
         Route::get('/create', 'PurchasesController@create')->name('purchases.create');
         Route::post('/store', 'PurchasesController@store')->name('purchases.store');
         Route::get('/edit/{id}','PurchasesController@edit')->name('purchases.edit');
         Route::post('/update/{id}','PurchasesController@update')->name('purchases.update');
         Route::get('/delete/{id}','PurchasesController@destroy')->name('purchases.delete');
+
+
     });
+    Route::get('/unstocked', 'PurchasesController@indexUnstockedEquipments')->name('purchases.unstocked');
+    Route::post('/unstocked/specifystock','PurchasesController@specifyStock')->name('purchases.products.specify');
     Route::prefix('receipts')->group(function (){
         Route::get('/', 'ReceiptsController@index')->name('receipts.index');
         Route::get('/create', 'ReceiptsController@create')->name('receipts.create');
@@ -151,5 +156,8 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/update/{id}','ConfigsController@update')->name('configs.update');
         Route::get('/delete/{id}','ConfigsController@destroy')->name('configs.delete');
     });
+
+
+
 
 });

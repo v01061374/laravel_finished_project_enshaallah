@@ -19,6 +19,6 @@ class Package extends Model
             'app\model\Product'
             , 'package_product'
             , 'pa_id', 'pr_id'
-        );
+        )->withTimestamps();
     }
 }

@@ -12,15 +12,15 @@ class Stock extends Model
         'id'
     ];
     public function products(){
-        $this->belongsToMany('App\models\Product', 'product_stock'
-            ,'st_id', 'pr_id');
+        return $this->belongsToMany('App\models\Product', 'product_stock'
+            ,'st_id', 'pr_id')->withTimestamps()->withPivot(['qty']);
     }
     public function materials(){
-        $this->belongsToMany('App\models\Material', 'material_stock'
-            ,'st_id', 'ma_id');
+        return $this->belongsToMany('App\models\Material', 'material_stock'
+            ,'st_id', 'ma_id')->withTimestamps();
     }
     public function tools(){
-        $this->belongsToMany('App\models\Tool', 'stock_tool'
-            ,'st_id', 'to_id');
+        return $this->belongsToMany('App\models\Tool', 'stock_tool'
+            ,'st_id', 'to_id')->withTimestamps();
     }
 }

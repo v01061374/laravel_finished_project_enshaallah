@@ -5,74 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>@yield('title')</title>
+    <title><?php echo $__env->yieldContent('title'); ?></title>
 
-    <link rel="stylesheet" href="{{asset('resources/plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/plugins/fontawesome-free/css/all.min.css')); ?>">
 
-    <link rel="stylesheet" href="{{asset('resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
-    <link rel="stylesheet" href="{{asset('resources/plugins/select2/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/plugins/select2/css/select2.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')); ?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('resources/dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/dist/css/adminlte.min.css')); ?>">
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('resources/assets/css/styles.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('resources/assets/css/styles.css')); ?>">
 
 
 
 
 </head>
-<body class="@yield('body-class')">
+<body class="<?php echo $__env->yieldContent('body-class'); ?>">
 <div class="wrapper">
-    @include('dashboard.parts.main-navbar')
-    @include('dashboard.parts.main-sidebar')
+    <?php echo $__env->make('dashboard.parts.main-navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('dashboard.parts.main-sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">@yield('title')</h1>
+                        <h1 class="m-0 text-dark"><?php echo $__env->yieldContent('title'); ?></h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            @foreach($sections as $i => $section)
-                                <li class="breadcrumb-item {{ ($i==count($sections)-1)? "active": ""}}">
-                                    @if($i==0)
-                                        <a href="/{{$section}}">{{ucfirst($section)}}</a>
-                                    @elseif($i==count($sections)-1)
-                                        {{ucfirst($section)}}
-                                    @else
-                                        <a href="/dashboard/{{lcfirst($section)}}">{{$section}}</a>
-                                    @endif
+                            <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li class="breadcrumb-item <?php echo e(($i==count($sections)-1)? "active": ""); ?>">
+                                    <?php if($i==0): ?>
+                                        <a href="/<?php echo e($section); ?>"><?php echo e(ucfirst($section)); ?></a>
+                                    <?php elseif($i==count($sections)-1): ?>
+                                        <?php echo e(ucfirst($section)); ?>
+
+                                    <?php else: ?>
+                                        <a href="/dashboard/<?php echo e(lcfirst($section)); ?>"><?php echo e($section); ?></a>
+                                    <?php endif; ?>
                                 </li>
-                                {{--{{ ($i==count(explode('/',request()->path()))-1)? "":"/"}}--}}
-                            @endforeach
+                                
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        @yield('content')
-        @include('dashboard.parts.delete-modal')
+        <?php echo $__env->yieldContent('content'); ?>
+        <?php echo $__env->make('dashboard.parts.delete-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
-    @include('dashboard.parts.control-sidebar')
-    @include('dashboard.parts.main-footer')
+    <?php echo $__env->make('dashboard.parts.control-sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('dashboard.parts.main-footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="{{asset('resources/plugins/jquery/jquery.min.js')}}"></script>
+<script src="<?php echo e(asset('resources/plugins/jquery/jquery.min.js')); ?>"></script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('resources/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('resources/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<script src="{{asset('resources/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="<?php echo e(asset('resources/plugins/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
+<script src="<?php echo e(asset('resources/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+<script src="<?php echo e(asset('resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')); ?>"></script>
+<script src="<?php echo e(asset('resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')); ?>"></script>
+<script src="<?php echo e(asset('resources/plugins/select2/js/select2.full.min.js')); ?>"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('resources/dist/js/adminlte.min.js')}}"></script>
+<script src="<?php echo e(asset('resources/dist/js/adminlte.min.js')); ?>"></script>
 <script>
 
 
@@ -195,7 +196,7 @@
                             'st_id': stock_id,
                             'pu_id': pu_id,
                             'qty' : qty,
-                            "_token": "{{ csrf_token() }}",
+                            "_token": "<?php echo e(csrf_token()); ?>",
                         },
                         success: function(e) {
                             e.preventDefault();
@@ -212,6 +213,7 @@
     });
 
 </script>
-    @yield('scripts')
+    <?php echo $__env->yieldContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH D:\Projects\laravel_finished_project_enshaallah\resources\views/dashboard/layouts/master.blade.php ENDPATH**/ ?>

@@ -6,8 +6,11 @@ use App\CustomClasses\Hasher;
 use App\models\Product;
 use App\models\Purchase;
 
+use App\models\Stock;
 use App\Models\Supplier;
+use Doctrine\DBAL\Schema\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PurchasesController extends Controller
@@ -91,7 +94,6 @@ class PurchasesController extends Controller
                 Product::all(['id', 'title'])->toArray()
             )
         ;
-
         return view('dashboard.purchases.cu', compact(['suppliers', 'products']));
     }
 
@@ -110,8 +112,6 @@ class PurchasesController extends Controller
             'date' => 'required|date',
             'supplier_id' => 'required',
             'product_id' => 'required' // TODO check error output
-
-
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
@@ -124,8 +124,9 @@ class PurchasesController extends Controller
             $purchase->save();
             foreach ($request['product_id'] as $index => $product){
                 $purchase->products()->attach($product, [
-                    'unit_price' => $request['price'][$index], 'qty' => $request['qty'][$index]
+                    'unit_price' => $request['price'][$index], 'qty' => $request['qty'][$index], 'stocked' => false
                 ]);
+                // >>>>>>>>>>> Rise of unstocked equipments
             }
 
             //////////////////should add materials and tools
@@ -205,7 +206,6 @@ class PurchasesController extends Controller
         else{
             $old = Purchase::with(['supplier', 'products'])->find($id);
             // TODO find out how to get this from edit function
-
             $request = $this->decodeRequest($request, ['supplier_id', 'product_id']);
             $old->update($request->only(['date', 'supplier_id', 'side_costs']));
             $changes = $old->getChanges();
@@ -217,12 +217,12 @@ class PurchasesController extends Controller
                 $related_product = $related_products->find($product_id);
                 if($related_product){
                     if($related_product->pivot->qty!=$qtys[$index] || $related_product->pivot->unit_price != $prices[$index]){
-                        $changes['product_id'][] = $product_id;
+                        $changes['product_id'][$product_id] = true;
                         $old->products()->updateExistingPivot($product_id, ['qty' => $qtys[$index], 'unit_price' => $prices[$index]]);
                     }
                 }
                 else{
-                    $changes['product_id'][] = $product_id;
+                    $changes['product_id'][$product_id] = true;
                     $old->products()->attach($product_id, [
                     'unit_price' => $request['price'][$index], 'qty' => $request['qty'][$index]
                     ]);
@@ -231,8 +231,7 @@ class PurchasesController extends Controller
             foreach ($old['products'] as $old_product){
 
                 if(array_search($old_product['id'], $request['product_id'])===false){
-
-                    $changes['product_id'][] = $old_product['id'];
+                    $changes['product_id'][$old_product] = true;
                     $old->products()->detach($old_product['id']);
                 }
             }
@@ -261,5 +260,52 @@ class PurchasesController extends Controller
         else{
             abort(404);
         }
+    }
+
+
+    public function indexUnstockedEquipments(){
+        $purchases = Purchase::with(['unstocked_products'])->get();
+
+        // TODO Materials and tools model methods and ....
+        $unstockedPurchases = [];
+        $unstockedPurchases['products']=[];
+        foreach ($purchases as $j => $pr_pu){
+            foreach ($pr_pu['unstocked_products'] as  $i =>$product){
+                $unstockedPurchases['products'][$i]['product'] = $product;
+                $unstockedPurchases['products'][$i]['date'] = $purchases[$j]['date'];
+                $unstockedPurchases['products'][$i]['purchase_id'] = $purchases[$j]['id'];
+            }
+        }
+        $stocks =
+            $this->generateEncodedSelectArray(
+                Stock::all(['id', 'title'])->toArray()
+            )
+        ;
+        // TODO add link to purchase in view
+        return view('dashboard.purchases.unstocked', compact(['unstockedPurchases', 'stocks']));
+
+
+    }
+    public function specifyStock(Request $request){
+        $request = $this->decodeRequest($request, ['pr_id', 'st_id', 'pu_id']);
+        $pr_id = $request['pr_id'];
+        $st_id = $request['pr_id'];
+        $qty = $request['qty'];
+        $pu_id = $request['pu_id'];
+        $stock = Stock::find($st_id)->first();
+
+        if($stock->products()->exists($pr_id)){
+            $oldQty = $stock->products()->where('products.id', $pr_id)->first()->pivot->qty;
+            $stock->products()->updateExistingPivot($pr_id, ['qty' => $oldQty+$qty]);
+
+        }
+        else{
+            $stock->products()->attach($pr_id, [
+                'qty' => $qty
+            ]);
+        }
+        $purchase = Purchase::find($pu_id);
+        $purchase->products()->updateExistingPivot($pr_id, ['stocked' => 1]);
+
     }
 }

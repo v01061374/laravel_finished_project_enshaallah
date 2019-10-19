@@ -11,10 +11,6 @@
 @endsection
 
 @section('content')
-
-
-
-
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
@@ -44,18 +40,33 @@
                             <div id="inline-products">
                                 <table id="inline-products-table">
                                     <tbody>
+                                    {{--TODO disable selected products in next dropdown--}}
                                             @if(isset($purchase) && count($purchase['products']))
                                                 @foreach($purchase['products'] as $product)
                                                     <tr class="inline-product-record">
-                                                        <td>
-                                                            {!! Form::select('product_id[]',$products,\App\CustomClasses\Hasher::encode($product['id']),['required'=>'required', 'class' => 'form-control select2', 'placeholder' => 'Search Product Title']) !!}
-                                                        </td>
-                                                        <td>
-                                                            {!! Form::number('qty[]',$product->pivot->qty,[ 'class' => 'form-control', 'placeholder' => 'Quantity', 'min' => 1, 'required' => 'required' ]) !!}
-                                                        </td>
-                                                        <td>
-                                                            {!! Form::number('price[]',$product->pivot->unit_price,[ 'class' => 'form-control', 'placeholder' => 'Price (Rial)', 'min' => 1, 'required' => 'required' ]) !!}
-                                                        </td>
+
+                                                        @if(1==0 && $product['pivot']['stocked'])
+                                                            {{--TODO resolve + button problem--}}
+                                                            <td>
+                                                                {!! Form::select('product_id[]',$products,\App\CustomClasses\Hasher::encode($product['id']),['required'=>'required', 'class' => 'form-control select2', 'placeholder' => 'Search Product Title', 'disabled' => "true"]) !!}
+                                                            </td>
+                                                            <td>
+                                                                {!! Form::number('qty[]',$product->pivot->qty,[ 'class' => 'form-control', 'placeholder' => 'Quantity', 'min' => 1, 'required' => 'required' , 'disabled' => "true"]) !!}
+                                                            </td>
+                                                            <td>
+                                                                {!! Form::number('price[]',$product->pivot->unit_price,[ 'class' => 'form-control', 'placeholder' => 'Price (Rial)', 'min' => 1, 'required' => 'required' , 'disabled' => "true"]) !!}
+                                                            </td>
+                                                        @else
+                                                            <td>
+                                                                {!! Form::select('product_id[]',$products,\App\CustomClasses\Hasher::encode($product['id']),['required'=>'required', 'class' => 'form-control select2', 'placeholder' => 'Search Product Title']) !!}
+                                                            </td>
+                                                            <td>
+                                                                {!! Form::number('qty[]',$product->pivot->qty,[ 'class' => 'form-control', 'placeholder' => 'Quantity', 'min' => 1, 'required' => 'required' ]) !!}
+                                                            </td>
+                                                            <td>
+                                                                {!! Form::number('price[]',$product->pivot->unit_price,[ 'class' => 'form-control', 'placeholder' => 'Price (Rial)', 'min' => 1, 'required' => 'required' ]) !!}
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             <i title="Add New" class="inline-product-add fas fa-plus-circle" style="color:green; margin-left: 5px; cursor: pointer;"></i>
                                                         </td>
@@ -66,6 +77,7 @@
                                                 @endforeach
                                             @elseif(isset($purchase) && !count($purchase['products']))
                                                 <tr class="inline-product-record">
+
                                                     <td>
                                                     {!! Form::select('product_id[]',$products,'',['required'=>'required', 'class' => 'form-control select2', 'placeholder' => 'Search Product Title']) !!}
                                                     </td>

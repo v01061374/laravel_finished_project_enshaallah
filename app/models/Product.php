@@ -17,11 +17,11 @@ class Product extends Model
     }
     public function subProduct(){
         return $this->belongsToMany('App\models\Product'
-            ,'product_product', 'pr_id', 'spr_id');
+            ,'product_product', 'pr_id', 'spr_id')->withTimestamps();
     }
     public function material(){
         return $this->belongsToMany('App\models\Material'
-            ,'material_product', 'pr_id', 'ma_id');
+            ,'material_product', 'pr_id', 'ma_id')->withTimestamps();
     }
     public function size(){
         $this->belongsTo('App\models\Size', 'size_id');
@@ -30,7 +30,7 @@ class Product extends Model
         $this->belongsTo('App\models\Weight', 'weight_id');
     }
     public function stocks(){
-        return $this->belongsToMany('App\models\Stock');
+        return $this->belongsToMany('App\models\Stock')->withTimestamps();
     }
     public function packages(){
         return $this->belongsToMany(

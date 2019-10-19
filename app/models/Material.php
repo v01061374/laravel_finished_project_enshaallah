@@ -16,6 +16,6 @@ class Material extends Model
     }
     public function product(){
         return $this->belongsToMany('App\models\Product'
-            ,'material_product', 'ma_id', 'pr_id');
+            ,'material_product', 'ma_id', 'pr_id')->withTimestamps();
     }
 }

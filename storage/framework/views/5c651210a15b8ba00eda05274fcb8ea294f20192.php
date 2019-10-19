@@ -1,27 +1,27 @@
-@extends('dashboard.layouts.master', ['sections' => ['dashboard','Purchases']])
-@section('title')
+<?php $__env->startSection('title'); ?>
     Purchases
-@endsection
-@section('body-class')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('body-class'); ?>
     hold-transition layout-fixed sidebar-mini
-@endsection
+<?php $__env->stopSection(); ?>
 
     <!-- Content Wrapper. Contains page content -->
 
         <!-- /.content-header -->
-@section('content')
+<?php $__env->startSection('content'); ?>
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    @if(session()->has('message'))
+                    <?php if(session()->has('message')): ?>
                         <div class="alert alert-success">
-                            {{ session()->get('message') }}
+                            <?php echo e(session()->get('message')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="row mb-5">
-                    <a href="{{route('purchases.create')}}">
+                    <a href="<?php echo e(route('purchases.create')); ?>">
                         <button type="button" class="btn btn-block btn-primary">
                             <i class="far fa-plus-square"></i>
                             Add new
@@ -33,7 +33,7 @@
                         <table class="table table-bordered table-hover dataTable purchases-dataTable" role="grid">
                             <thead>
                                 <tr>
-                                    {{--TODO add individual column search--}}
+                                    
                                     <th tabindex="0" rowspan="1" colspan="1" aria-sort="ascending" class="sorting_asc">#</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Date</th>
                                     <th tabindex="0" rowspan="1" colspan="1" class="sorting">Supplier</th>
@@ -43,32 +43,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($purchases as $i => $purchase)
+                                <?php $__currentLoopData = $purchases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i => $purchase): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td class="sorting_1">
-                                            {{$i+1}}
+                                            <?php echo e($i+1); ?>
+
                                         </td>
                                         <td>
-                                            {{$purchase['date']}}
+                                            <?php echo e($purchase['date']); ?>
+
                                         </td>
                                         <td>
-                                            {{$purchase['supplier']['title']}}
+                                            <?php echo e($purchase['supplier']['title']); ?>
+
                                         </td>
                                         <td>
-                                            {{$purchase['side_costs']}}
+                                            <?php echo e($purchase['side_costs']); ?>
+
                                         </td>
                                         <td>
-                                            {{$purchase['total_price']}}
+                                            <?php echo e($purchase['total_price']); ?>
+
                                         </td>
                                         <td id="row-actions">
                                             <a href="" title="details"><i  style="color: #869099; margin-right: 5px;" class="fas fa-eye"></i></a>
-                                                {{--link to purchase--}}
-                                            <a title="edit" href="{{route('purchases.edit', ['id' => \App\CustomClasses\Hasher::encode($purchase['id'])])}}"><i style="color: #869099; margin-right: 5px;" class="fas fa-edit"></i></a>
-                                            <i title="delete" class="row-delete fas fa-trash-alt" data-toggle="modal" data-target="#modal-delete" style="color: red; margin-right: 5px; cursor: pointer;" data-action="{{route('purchases.products.specify',\App\CustomClasses\Hasher::encode($purchase['id']))}}"></i>
+                                                
+                                            <a title="edit" href="<?php echo e(route('purchases.edit', ['id' => \App\CustomClasses\Hasher::encode($purchase['id'])])); ?>"><i style="color: #869099; margin-right: 5px;" class="fas fa-edit"></i></a>
+                                            <i title="delete" class="row-delete fas fa-trash-alt" data-toggle="modal" data-target="#modal-delete" style="color: red; margin-right: 5px; cursor: pointer;" data-action="<?php echo e(route('purchases.products.specify',\App\CustomClasses\Hasher::encode($purchase['id']))); ?>"></i>
 
                                         </td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -89,5 +94,7 @@
         <!-- /.c <tent -->
 
     <!-- /.content-wrapper -->
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('dashboard.layouts.master', ['sections' => ['dashboard','Purchases']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Projects\laravel_finished_project_enshaallah\resources\views/dashboard/purchases/index.blade.php ENDPATH**/ ?>

@@ -65,7 +65,6 @@
                                                 {{--link to purchase--}}
                                             <a title="edit" href="{{route('packages.edit', ['id' => \App\CustomClasses\Hasher::encode($package['id'])])}}"><i style="color: #869099; margin-right: 5px;" class="fas fa-edit"></i></a>
                                             <i title="delete" class="row-delete fas fa-trash-alt" data-toggle="modal" data-target="#modal-delete" style="color: red; margin-right: 5px; cursor: pointer;" data-action="{{route('packages.delete',\App\CustomClasses\Hasher::encode($package['id']))}}"></i>
-
                                         </td>
                                     </tr>
                                 @endforeach
